@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import sites from "./Site";
+import sites from "./data/Site";
 import ProgressBar from "./component/progressBar/ProgressBar";
 
 function App() {

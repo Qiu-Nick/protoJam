@@ -1,6 +1,6 @@
 const sites = [
 	{
-		ID: "1",
+		id: "1",
 		nom: "Goutte",
 		type: "Eau",
 		densité: "60",
@@ -8,7 +8,7 @@ const sites = [
 		danger_alentour: "14",
 	},
 	{
-		ID: "2",
+		id: "2",
 		nom: "Source",
 		type: "Eau",
 		densité: "70",
@@ -16,7 +16,7 @@ const sites = [
 		danger_alentour: "10",
 	},
 	{
-		ID: "3",
+		id: "3",
 		nom: "Rivière",
 		type: "Eau",
 		densité: "80",
@@ -24,7 +24,7 @@ const sites = [
 		danger_alentour: "20",
 	},
 	{
-		ID: "4",
+		id: "4",
 		nom: "Alpha",
 		type: "Bunker",
 		densité: "50",
@@ -32,7 +32,7 @@ const sites = [
 		danger_alentour: "30",
 	},
 	{
-		ID: "5",
+		id: "5",
 		nom: "Bravo",
 		type: "Bunker",
 		densité: "55",
@@ -40,7 +40,7 @@ const sites = [
 		danger_alentour: "25",
 	},
 	{
-		ID: "6",
+		id: "6",
 		nom: "Charlie",
 		type: "Bunker",
 		densité: "60",
@@ -48,7 +48,7 @@ const sites = [
 		danger_alentour: "35",
 	},
 	{
-		ID: "7",
+		id: "7",
 		nom: "Delta",
 		type: "Bunker",
 		densité: "65",
@@ -56,7 +56,7 @@ const sites = [
 		danger_alentour: "40",
 	},
 	{
-		ID: "8",
+		id: "8",
 		nom: "Station Électrique Espilon",
 		type: "Electricité",
 		densité: "90",
@@ -64,7 +64,7 @@ const sites = [
 		danger_alentour: "5",
 	},
 	{
-		ID: "9",
+		id: "9",
 		nom: "Station Électrique Zeta",
 		type: "Electricité",
 		densité: "85",

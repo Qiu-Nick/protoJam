@@ -36,9 +36,11 @@ function Maps() {
 	const mapRef = useRef<HTMLDivElement | null>(null);
 	const mapInstance = useRef<LeafletMap | null>(null);
 
+
+
 	// Constants
 	const STRASBOURG_COORDS: [number, number] = [
-		48.582366922989564, 7.751033141729111,
+		20.953788, -11.235549
 	];
 	const ZOOM_LEVEL = 13;
 	const TILE_LAYER_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";

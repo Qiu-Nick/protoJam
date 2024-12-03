@@ -65,7 +65,7 @@ function Maps() {
 
 			L.marker(STRASBOURG_COORDS)
 				.addTo(mapInstance.current)
-				.bindPopup("Strasbourg");
+				.bindPopup("Bunker Bravo");
 		} catch (error) {
 			console.error("Erreur d'initialisation de la carte:", error);
 		}

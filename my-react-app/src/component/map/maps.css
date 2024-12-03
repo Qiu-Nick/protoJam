@@ -1,0 +1,21 @@
+@import "../../App.css";
+
+#map {
+  height: 80%;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 10px 5px 5px black;
+}
+@media (max-width: 768px) {
+  #map {
+    height: 40%;
+    width: 100%;
+  }
+}
+
+.map_container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}

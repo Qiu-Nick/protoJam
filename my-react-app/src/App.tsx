@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-import ProgressBar from "./component/progressBar/ProgressBar";
 import sites from "./Site";
+import ProgressBar from "./component/progressBar/ProgressBar";
 
 function App() {
 	const [count, setCount] = useState(0);

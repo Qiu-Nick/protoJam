@@ -17,22 +17,31 @@ const ProgressBar: React.FC<{ activeSiteId: string | null }> = ({ activeSiteId }
 	const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
 	// Fonction pour récupérer les données
-	const fetchSites = async () => {
-		try {
-			const response = await fetch("https://proto-jam-api.vercel.app/items");
-			const data = await response.json();
-			console.log("API response:", data);
-			setSites(data.sites || []);
-		} catch (error) {
-			console.error("Erreur lors du fetch:", error);
-			alert("Impossible de récupérer les sites. Veuillez réessayer plus tard.");
-		} finally {
-			setLoading(false);
-		}
-	};
 
 	// Appeler l'API au chargement du composant
 	useEffect(() => {
+		const fetchSites = async () => {
+			try {
+				const response = await fetch(
+					"https://proto-jam-api.vercel.app/items",
+					{},
+				);
+				console.log(response);
+
+				if (!response.ok) {
+					throw new Error("Réponse du serveur incorrecte");
+				}
+				const data = await response.json();
+				setSites(data.sites || []);
+			} catch (error) {
+				console.error("Erreur lors du fetch:", error);
+				alert(
+					"Impossible de récupérer les sites. Veuillez réessayer plus tard.",
+				);
+			} finally {
+				setLoading(false);
+			}
+		};
 		fetchSites();
 	}, []);
 

@@ -10,34 +10,19 @@ const App: React.FC = () => {
 	const navigate = useNavigate();
 
 	return (
-
-		<Routes>
-			<Route
-				path="/"
-				element={
-					<div className="fond">
-						<Header />
-						<button
-							type="button"
-							onClick={() => navigate("/browser")}
-							className="bouton"
-						>
-							Safe Zones
-						</button>
-					</div>
-				}
-			/>
-			<Route path="/browser" element={<Browser />} />
-		</Routes>
-
 		<div className="App">
 			<Routes>
 				<Route
 					path="/"
 					element={
-						<div>
-							<button type="button" onClick={() => navigate("/browser")}>
-								Go to Browser
+						<div className="fond">
+							<Header />
+							<button
+								type="button"
+								onClick={() => navigate("/browser")}
+								className="bouton"
+							>
+								Safe Zones
 							</button>
 						</div>
 					}

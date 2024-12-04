@@ -7,7 +7,9 @@ declare global {
 		L: {
 			map: (el: HTMLElement) => LeafletMap;
 			tileLayer: (url: string, options: TileLayerOptions) => TileLayer;
-			marker: (coords: [number, number]) => Marker;
+			marker: (coords: [number, number], options?: MarkerOptions) => Marker;
+			divIcon: (options: DivIconOptions) => DivIcon;
+			icon: (options: IconOptions) => Icon;
 		};
 	}
 }
@@ -30,6 +32,22 @@ interface TileLayerOptions {
 interface Marker {
 	addTo: (map: LeafletMap) => Marker;
 	bindPopup: (content: string) => Marker;
+	on: (event: string, callback: () => void) => void;
+}
+
+interface MarkerOptions {
+	icon: Icon;
+}
+
+interface Icon {
+}
+
+interface IconOptions {
+	iconUrl: string;
+	iconSize: [number, number];
+	iconAnchor: [number, number];
+	popupAnchor: [number, number];
+	shadowSize: [number, number];
 }
 
 function getRandomCoords(
@@ -54,7 +72,7 @@ function getRandomCoords(
 	return [newLat, newLon];
 }
 
-function Maps({ activeFilter, setActiveSiteId }) {
+function Maps({ activeFilter, setActiveSiteId, activeSiteId }) {
 	const mapRef = useRef<HTMLDivElement | null>(null);
 	const mapInstance = useRef<LeafletMap | null>(null);
 
@@ -79,7 +97,12 @@ function Maps({ activeFilter, setActiveSiteId }) {
 	useEffect(() => {
 		const L = window.L;
 
-		if (!L || !mapRef.current || mapInstance.current) return;
+		if (!L || !mapRef.current) return;
+
+		if (mapInstance.current) {
+			mapInstance.current.remove();
+			mapInstance.current = null;
+		}
 
 		try {
 			const initialCoords = locations[0].coords;
@@ -93,10 +116,30 @@ function Maps({ activeFilter, setActiveSiteId }) {
 				attribution: MAP_ATTRIBUTION,
 			}).addTo(mapInstance.current);
 
+			const defaultIcon = L.icon({
+				iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+				shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+				iconSize: [25, 41],
+				iconAnchor: [12, 41],
+				popupAnchor: [1, -34],
+				shadowSize: [41, 41]
+			});
+
+			const redIcon = L.icon({
+				iconUrl: '/src/assets/images/map-marker-red.svg',
+				shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+				iconSize: [25, 41],
+				iconAnchor: [12, 41],
+				popupAnchor: [1, -34],
+				shadowSize: [41, 41]
+			});
+
 			locations
 				.filter((location) => !activeFilter || location.type === activeFilter)
 				.forEach((location) => {
-					L.marker(location.coords)
+					const marker = L.marker(location.coords, {
+						icon: location.id === activeSiteId ? redIcon : defaultIcon,
+					})
 						.addTo(mapInstance.current)
 						.bindPopup(location.name)
 						.on('click', () => setActiveSiteId(location.id));
@@ -111,7 +154,7 @@ function Maps({ activeFilter, setActiveSiteId }) {
 				mapInstance.current = null;
 			}
 		};
-	}, [activeFilter]);
+	}, [activeFilter, activeSiteId]);
 
 	return (
 		<div className="map_container">

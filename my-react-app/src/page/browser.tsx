@@ -12,7 +12,7 @@ const Browser: React.FC = () => {
 	return (
 		<div>
 			<NavBar setActiveFilter={setActiveFilter} activeFilter={activeFilter} />
-			<Maps activeFilter={activeFilter} setActiveSiteId={setActiveSiteId} />
+			<Maps activeFilter={activeFilter} setActiveSiteId={setActiveSiteId} activeSiteId={activeSiteId} />
 			<ProgressBar activeSiteId={activeSiteId} />
 		</div>
 	);

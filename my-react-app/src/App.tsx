@@ -5,6 +5,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import Browser from "./page/browser";
 import Header from "./component/Header";
+import Footer from "./component/Footer";
 
 const App: React.FC = () => {
 	const navigate = useNavigate();
@@ -24,6 +25,7 @@ const App: React.FC = () => {
 							>
 								Safe Zones
 							</button>
+							<Footer />
 						</div>
 					}
 				/>

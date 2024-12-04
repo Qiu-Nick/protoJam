@@ -1,15 +1,10 @@
 import "./App.css";
 
-// function App() {
-// 	return (
-// 		<>
-// 			<NavBar />
-// 		</>
-
 import type React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import Browser from "./page/browser";
+import Header from "./component/Header";
 
 const App: React.FC = () => {
 	const navigate = useNavigate();
@@ -19,9 +14,14 @@ const App: React.FC = () => {
 			<Route
 				path="/"
 				element={
-					<div>
-						<button type="button" onClick={() => navigate("/browser")}>
-							Go to Browser
+					<div className="fond">
+						<Header />
+						<button
+							type="button"
+							onClick={() => navigate("/browser")}
+							className="bouton"
+						>
+							Safe Zones
 						</button>
 					</div>
 				}

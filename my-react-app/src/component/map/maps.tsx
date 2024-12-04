@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./maps.css";
 
 // Improved type declarations without npm types
@@ -36,12 +36,24 @@ function Maps() {
 	const mapRef = useRef<HTMLDivElement | null>(null);
 	const mapInstance = useRef<LeafletMap | null>(null);
 
-
-
 	// Constants
-	const STRASBOURG_COORDS: [number, number] = [
-		20.953788, -11.235549
-	];
+	// const STRASBOURG_COORDS: [number, number] = [20.953788, -11.235549];
+	const [STRASBOURG_COORDS, setSTRASBOURG_COORDS] = useState<[number, number]>([
+		20.953788, -11.235549,
+	]);
+	navigator.geolocation.getCurrentPosition(
+		(position) => {
+			setSTRASBOURG_COORDS([
+				position.coords.latitude,
+				position.coords.longitude,
+			]);
+		},
+		() => {
+			console.error("Erreur de récupération des coordonnées GPS");
+		},
+		{},
+	);
+
 	const ZOOM_LEVEL = 13;
 	const TILE_LAYER_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 	const MAP_ATTRIBUTION =
@@ -76,7 +88,7 @@ function Maps() {
 				mapInstance.current = null;
 			}
 		};
-	}, []);
+	}, [STRASBOURG_COORDS]);
 
 	return (
 		<div className="map_container">

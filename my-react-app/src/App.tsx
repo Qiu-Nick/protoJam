@@ -10,6 +10,7 @@ const App: React.FC = () => {
 	const navigate = useNavigate();
 
 	return (
+
 		<Routes>
 			<Route
 				path="/"
@@ -28,6 +29,22 @@ const App: React.FC = () => {
 			/>
 			<Route path="/browser" element={<Browser />} />
 		</Routes>
+
+		<div className="App">
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<div>
+							<button type="button" onClick={() => navigate("/browser")}>
+								Go to Browser
+							</button>
+						</div>
+					}
+				/>
+				<Route path="/browser" element={<Browser />} />
+			</Routes>
+		</div>
 	);
 };
 

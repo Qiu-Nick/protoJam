@@ -1,4 +1,3 @@
-
 * {
 	margin: 0;
 	padding: 0;
@@ -9,3 +8,127 @@
 	margin-top: 2rem;
 }
 
+:root {
+	--primary-color: #1b1b1b;
+	--secondary-color: #b7410e;
+	--tertiary-color: #5bff62;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-image: url("../src/assets/images/bunker.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	height: 100%;
+	width: 100%;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.carre {
+	display: flex;
+	flex-direction: column;
+	background-color: #1b1b1b;
+	padding: 20px;
+	margin: 0px;
+	border: 1px solid #b7410e;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	color: white;
+}
+
+a {
+	font-weight: 500;
+	color: #646cff;
+	text-decoration: inherit;
+}
+a:hover {
+	color: #535bf2;
+}
+
+body {
+	display: flex;
+	place-items: center;
+	flex-direction: column;
+}
+
+h1 {
+	font-size: 3.2em;
+	line-height: 1.1;
+	color: #b7410e;
+}
+
+.fond {
+	margin-top: 5em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15em;
+}
+
+.bouton {
+	display: box;
+	position: relative;
+	width: 150px;
+	height: 150px;
+	background: linear-gradient(to bottom, green 0%, #5bff62 100%);
+	border-radius: 50%;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+	font-size: 1.5em;
+}
+
+.bouton::before {
+	display: block;
+	position: absolute;
+	top: 0;
+	z-index: -1;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	background: #b7410e;
+	content: "";
+	animation: pulse 1s infinite;
+}
+
+.bouton:hover::before {
+	animation: none;
+	opacity: 0;
+	transform: scale(1.3);
+}
+.bouton.is-clicked {
+	background: linear-gradient(to bottom, #b7410e 0%, #b7410e 100%);
+}
+.bouton.is-clicked:before {
+	animation: blastOut 1s;
+}
+
+@keyframes pulse {
+	from {
+		transform: scale(1);
+		opacity: 1.5;
+	}
+	to {
+		transform: scale(1.3);
+		opacity: 0.2;
+	}
+}
+
+@keyframes blastOut {
+	from {
+		transform: scale(0.9);
+		opacity: 0.4;
+	}
+	to {
+		transform: scale(10);
+		opacity: 0;
+	}
+}

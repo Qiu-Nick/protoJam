@@ -38,7 +38,7 @@ function getRandomCoords(
 ): [number, number] {
 	const y0 = center[0];
 	const x0 = center[1];
-	const rd = radius / 111300; // about 111300 meters in one degree
+	const rd = radius / 111300;
 
 	const u = Math.random();
 	const v = Math.random();
@@ -54,7 +54,7 @@ function getRandomCoords(
 	return [newLat, newLon];
 }
 
-function Maps({ activeFilter }) {
+function Maps({ activeFilter, setActiveSiteId }) {
 	const mapRef = useRef<HTMLDivElement | null>(null);
 	const mapInstance = useRef<LeafletMap | null>(null);
 
@@ -65,24 +65,16 @@ function Maps({ activeFilter }) {
 		'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 	const locations = [
-		{ name: "Goutte", coords: [21.011523, -11.103842], type: "Eau" },
-		{ name: "Source", coords: [21.002124, -11.09058], type: "Eau" },
-		{ name: "Puits", coords: [21.031523, -11.123842], type: "Eau" },
-		{ name: "Bunker Alpha", coords: [21.038498, -11.084229], type: "Bunker" },
-		{ name: "Bunker Bravo", coords: [20.989784, -11.121737], type: "Bunker" },
-		{ name: "Bunker Charlie", coords: [21.015505, -11.054188], type: "Bunker" },
-		{ name: "Bunker Delta", coords: [21.021915, -11.090924], type: "Bunker" },
-		{
-			name: "Station Électrique 1",
-			coords: [20.999159, -11.058394],
-			type: "Electricité",
-		},
-		{
-			name: "Station Électrique 2",
-			coords: [21.021514, -11.10088],
-			type: "Electricité",
-		},
-	];
+			{ id: "1", name: "Goutte", coords: [21.011523, -11.103842], type: "Eau" },
+			{ id: "2", name: "Source", coords: [21.002124, -11.09058], type: "Eau" },
+			{ id: "3", name: "Puits", coords: [21.031523, -11.123842], type: "Eau" },
+			{ id: "4", name: "Bunker Alpha", coords: [21.038498, -11.084229], type: "Bunker" },
+			{ id: "5", name: "Bunker Bravo", coords: [20.989784, -11.121737], type: "Bunker" },
+			{ id: "6", name: "Bunker Charlie", coords: [21.015505, -11.054188], type: "Bunker" },
+			{ id: "7", name: "Bunker Delta", coords: [21.021915, -11.090924], type: "Bunker" },
+			{ id: "8", name: "Station Électrique 1", coords: [20.999159, -11.058394], type: "Electricité" },
+			{ id: "9", name: "Station Électrique 2", coords: [21.021514, -11.10088], type: "Electricité" },
+		];
 
 	useEffect(() => {
 		const L = window.L;
@@ -106,7 +98,8 @@ function Maps({ activeFilter }) {
 				.forEach((location) => {
 					L.marker(location.coords)
 						.addTo(mapInstance.current)
-						.bindPopup(location.name);
+						.bindPopup(location.name)
+						.on('click', () => setActiveSiteId(location.id));
 				});
 		} catch (error) {
 			console.error("Erreur d'initialisation de la carte:", error);

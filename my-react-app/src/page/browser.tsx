@@ -7,12 +7,13 @@ import NavBar from "../component/NavBar";
 
 const Browser: React.FC = () => {
 	const [activeFilter, setActiveFilter] = useState<string | null>(null);
+	const [activeSiteId, setActiveSiteId] = useState<string | null>(null);
 
 	return (
 		<div>
 			<NavBar setActiveFilter={setActiveFilter} activeFilter={activeFilter} />
-			<Maps activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-			<ProgressBar />
+			<Maps activeFilter={activeFilter} setActiveSiteId={setActiveSiteId} />
+			<ProgressBar activeSiteId={activeSiteId} />
 		</div>
 	);
 };

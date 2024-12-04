@@ -11,7 +11,7 @@ interface Site {
 	danger_alentour: string;
 }
 
-const ProgressBar: React.FC = () => {
+const ProgressBar: React.FC<{ activeSiteId: string | null }> = ({ activeSiteId }) => {
 	const [sites, setSites] = useState<Site[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [activeFilter, setActiveFilter] = useState<string | null>(null);
@@ -36,18 +36,15 @@ const ProgressBar: React.FC = () => {
 		fetchSites();
 	}, []);
 
-	// Fonction pour filtrer les sites
-	const filteredSites = activeFilter
-		? sites.filter((site) => site.type === activeFilter)
-		: sites;
+	const selectedSite = sites.find((site) => site.id === activeSiteId);
 
 	return (
 		<>
 			{loading && <p>Chargement des données...</p>}
-			{filteredSites.map((site) => (
-				<div key={site.id} style={{ marginBottom: "20px" }}>
+			{selectedSite && (
+				<div key={selectedSite.id} style={{ marginBottom: "20px" }}>
 					<h2>
-						{site.nom} ({site.type})
+						{selectedSite.nom} ({selectedSite.type})
 					</h2>
 					<div
 						className="w3-light-grey w3-round-xlarge"
@@ -56,9 +53,9 @@ const ProgressBar: React.FC = () => {
 						<div
 							id="progress_bar"
 							className="w3-container w3-blue w3-round-xlarge"
-							style={{ width: `${Number.parseInt(site.densité)}%` }}
+							style={{ width: `${Number.parseInt(selectedSite.densité)}%` }}
 						>
-							Densité: {site.densité}%
+							Densité: {selectedSite.densité}%
 						</div>
 					</div>
 					<div
@@ -68,22 +65,22 @@ const ProgressBar: React.FC = () => {
 						<div
 							id="progress_bar"
 							className="w3-container w3-green w3-round-xlarge"
-							style={{ width: `${Number.parseInt(site.ressources)}%` }}
+							style={{ width: `${Number.parseInt(selectedSite.ressources)}%` }}
 						>
-							Ressources: {site.ressources}%
+							Ressources: {selectedSite.ressources}%
 						</div>
 					</div>
 					<div className="w3-light-grey w3-round-xlarge">
 						<div
 							id="progress_bar"
 							className="w3-container w3-red w3-round-xlarge"
-							style={{ width: `${Number.parseInt(site.danger_alentour)}%` }}
+							style={{ width: `${Number.parseInt(selectedSite.danger_alentour)}%` }}
 						>
-							Danger Alentour: {site.danger_alentour}%
+							Danger Alentour: {selectedSite.danger_alentour}%
 						</div>
 					</div>
 				</div>
-			))}
+			)}
 		</>
 	);
 };

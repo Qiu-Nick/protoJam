@@ -1,0 +1,21 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+nav ul {
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	gap: 5em;
+	padding: 2em;
+}
+nav ul li {
+	border-radius: 10px;
+	background-color: #b7410e;
+	cursor: pointer;
+	color: white;
+	padding: 1em;
+	font-size: 1.2em;
+}

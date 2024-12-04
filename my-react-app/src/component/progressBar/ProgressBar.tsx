@@ -14,6 +14,7 @@ interface Site {
 const ProgressBar: React.FC = () => {
 	const [sites, setSites] = useState<Site[]>([]);
 	const [loading, setLoading] = useState(true);
+	const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
 	// Fonction pour récupérer les données
 	const fetchSites = async () => {
@@ -35,10 +36,15 @@ const ProgressBar: React.FC = () => {
 		fetchSites();
 	}, []);
 
+	// Fonction pour filtrer les sites
+	const filteredSites = activeFilter
+		? sites.filter((site) => site.type === activeFilter)
+		: sites;
+
 	return (
 		<>
 			{loading && <p>Chargement des données...</p>}
-			{sites.map((site) => (
+			{filteredSites.map((site) => (
 				<div key={site.id} style={{ marginBottom: "20px" }}>
 					<h2>
 						{site.nom} ({site.type})

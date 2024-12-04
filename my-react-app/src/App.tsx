@@ -1,12 +1,10 @@
-
 import "./App.css";
-import NavBar from "./component/NavBar";
 
-function App() {
-	return (
-		<>
-			<NavBar />
-		</>
+// function App() {
+// 	return (
+// 		<>
+// 			<NavBar />
+// 		</>
 
 import type React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -30,7 +28,6 @@ const App: React.FC = () => {
 			/>
 			<Route path="/browser" element={<Browser />} />
 		</Routes>
-
 	);
 };
 
